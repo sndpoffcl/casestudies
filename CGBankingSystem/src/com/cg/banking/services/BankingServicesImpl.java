@@ -39,7 +39,7 @@ public class BankingServicesImpl implements BankingServices{
 			accnt.setAccountBalance(newAmount);
 			int transactionId = BankingDBUtil.getTRANSACTION_NO_COUNTER();
 			Transaction transaction = new Transaction(transactionId, amount , "DEPOSITED");
-			accnt.getTransactions().put(1, transaction);
+			accnt.getTransactions().put(transactionId, transaction);
 			return newAmount;
 		}else {
 			throw new AccountBlockedException("This account has been blocked");
@@ -49,30 +49,41 @@ public class BankingServicesImpl implements BankingServices{
 	@Override
 	public float withdrawAmount(long accountNo, float amount, int pinNumber) throws InsufficientAmountException,
 			AccountNotFoundException, InvalidPinNumberException, BankingServicesDownException, AccountBlockedException {
-		int count=0;
 		Account accnt = getAccountDetails(accountNo);
-		if(accnt.getAccountStatus().equalsIgnoreCase("ACTIVE")) {
-			if(accnt.getPinNumber()==pinNumber){
-				float newAmount = accnt.getAccountBalance() - amount ; 
-				if(newAmount < 500) 
-					throw new InsufficientAmountException("Balance cannot go below 500");
-				else
-					accnt.setAccountBalance(newAmount);
-				return newAmount;
-			}else 
-				throw new InvalidPinNumberException("YOUR PIN IS WRONG");	
-		}
-		else 
+		if(accnt.getAccountStatus().equalsIgnoreCase("ACTIVE")){
+			for(int i =0;i<2;i++) {
+				if(accnt.getPinNumber()==pinNumber) {
+					float newAmount = accnt.getAccountBalance() - amount ; 
+					if(newAmount < 500) 
+						throw new InsufficientAmountException("Balance cannot go below 500");
+					else
+						accnt.setAccountBalance(newAmount);
+					return newAmount;
+				}
+				else {
+					System.out.println("Your PIN is wrong . Kindly enter again");
+					pinNumber = sc.nextInt();
+				}
+			}
+			accnt.setAccountStatus("BLOCKED");
+			throw new InvalidPinNumberException("YOUR PIN WAS WRONG MULTIPLE TIMES ");
+		}else {
 			throw new AccountBlockedException("YOUR ACCOUNT HAS BEEN BLOCKED");
-		}
-	
+	}
+}
 
+	
 	@Override
 	public boolean fundTransfer(long accountNoTo, long accountNoFrom, float transferAmount, int pinNumber)
 			throws InsufficientAmountException, AccountNotFoundException, InvalidPinNumberException,
 			BankingServicesDownException, AccountBlockedException {
-		// TODO Auto-generated method stub
-		return false;
+			float newAmount = withdrawAmount(accountNoFrom, transferAmount, pinNumber);
+			float newAmountAfterDep = depositAmount(accountNoTo, newAmount);
+			if(newAmount!=0.00f) 
+				return true;
+			else
+				return false;
+		
 	}
 
 	@Override

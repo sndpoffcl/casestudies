@@ -1,5 +1,6 @@
 package com.cg.banking.client;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.cg.banking.beans.Account;
@@ -11,6 +12,7 @@ import com.cg.banking.exceptions.InvalidAccountTypeException;
 import com.cg.banking.exceptions.InvalidAmountException;
 import com.cg.banking.exceptions.InvalidPinNumberException;
 import com.cg.banking.services.*;
+import com.cg.banking.util.BankingDBUtil;
 
 
 public class MainClass {
@@ -27,7 +29,8 @@ public class MainClass {
 			System.out.println("4. Fund Transfer");
 			System.out.println("5. Get Account Details");
 			System.out.println("6. Show all accounts");
-			System.out.println("7. Exit");
+			System.out.println("7. Get Transactions");
+			System.out.println("8. Exit");
 			Scanner sc = new Scanner(System.in);
 			int switchKey = sc.nextInt();
 			switch(switchKey)
@@ -76,27 +79,50 @@ public class MainClass {
 					 
 			case 4 : System.out.println("*****FUND TRANSFER*****");
 					 System.out.println("Enter your account number");
-					 accNo = sc.nextLong();
+					 long accountNoFrom = sc.nextLong();
 					 System.out.println("Enter amount you want to transfer");
-					 float transAmount = sc.nextFloat();
+					 float transferAmount = sc.nextFloat();
 					 System.out.println("Enter account number to transfer");
-					 long newAccNo = sc.nextLong();
+					 long accountNoTo = sc.nextLong();
 					 System.out.println("Enter your pin number");
-					 pinNo = sc.nextInt();
-					 newAmount = bankServices.withdrawAmount(accNo, transAmount, pinNo);
-					 bankServices.depositAmount(newAccNo, transAmount);
-					 System.out.println("Your updated account number is :" + newAmount);
+					 int pinNumber = sc.nextInt();
+					 boolean success = bankServices.fundTransfer(accountNoTo, accountNoFrom, transferAmount, pinNumber);
+					 if(success)
+						 System.out.println("Your transfer was successful ");
+					 else
+						 System.out.println("NOT SUCCESSFUL");
 					 break;
 			
 			case 5 : System.out.println("*****ACCOUNT DETAILS********");
 					 System.out.println("Enter your account number");
 					 accNo = sc.nextLong();
-					 bankServices.getAccountDetails(accNo).toString();
+					 System.out.println("Enter your pin number");
+					 pinNo = sc.nextInt();
+					 if(bankServices.getAccountDetails(accNo).getPinNumber()==pinNo)
+						 System.out.println(bankServices.getAccountDetails(accNo).toString());
+					 else
+						 System.out.println("WRONG PIN");
+					 break;
 					 
-			case 7: flag = false;
-					break;
+			case 6 : System.out.println("******ALL ACCOUNTS*******");
+					 System.out.println(Arrays.asList(BankingDBUtil.accounts));
+					 break;
+					 
+			case 7 : System.out.println("******PRINT TRANSACTIONS******");
+					 System.out.println("Enter your account number");
+					 accNo = sc.nextLong();
+					 System.out.println("Enter your pin");
+					 pinNo = sc.nextInt();
+					 if(bankServices.getAccountDetails(accNo).getPinNumber()==pinNo)
+						 System.out.println(Arrays.asList((bankServices.getAccountDetails(accNo).getTransactions())));
+					 else
+						 System.out.println("WRONG PIN NUMBER");
+					 break;
+					 
+			case 8 : flag = false;
+					 break;
 			default: System.out.println("Invalid option");
-					break;
+					 break;
 			}
 		}
 	}
