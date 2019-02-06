@@ -56,8 +56,12 @@ public class BankingServicesImpl implements BankingServices{
 					float newAmount = accnt.getAccountBalance() - amount ; 
 					if(newAmount < 500) 
 						throw new InsufficientAmountException("Balance cannot go below 500");
-					else
+					else {
 						accnt.setAccountBalance(newAmount);
+						int transactionId = BankingDBUtil.getTRANSACTION_NO_COUNTER();
+						Transaction transaction = new  Transaction(transactionId, amount, "WITHDRAW");
+						accnt.getTransactions().put(transactionId, transaction);
+					}
 					return newAmount;
 				}
 				else {
@@ -67,9 +71,9 @@ public class BankingServicesImpl implements BankingServices{
 			}
 			accnt.setAccountStatus("BLOCKED");
 			throw new InvalidPinNumberException("YOUR PIN WAS WRONG MULTIPLE TIMES ");
-		}else {
+		}else 
 			throw new AccountBlockedException("YOUR ACCOUNT HAS BEEN BLOCKED");
-	}
+	
 }
 
 	
@@ -111,8 +115,10 @@ public class BankingServicesImpl implements BankingServices{
 	@Override
 	public String accountString(long accountNo)
 			throws BankingServicesDownException, AccountNotFoundException, AccountBlockedException {
-		// TODO Auto-generated method stub
-		return null;
+		Account accnt = getAccountDetails(accountNo);
+		return "Account [pinNumber=" + accnt.getPinNumber() + ", accountType=" + accnt.getAccountType() + ", accountStatus=" + accnt.getAccountStatus()
+				+ ", accountBalance=" + accnt.getAccountBalance() + ", accountNo=" + accnt.getAccountNo()
+				+  "]";
 	}
 	
 }

@@ -40,11 +40,13 @@ public class MainClass {
 					 int accType= sc.nextInt();
 					 float initBalance;
 					 String accountType;
-					 if(accType == 1 ) {
+					 if(accType == 1 )
 						  accountType = "Savings Account";
-					 }else{
+					 else if(accType == 2)
 						  accountType = "Current Account" ; 
-					 }
+					 else 
+						 throw new InvalidAccountTypeException("This is an invalid choice.");
+					 
 					 System.out.println("Enter initial balance");
 					 initBalance = sc.nextFloat();
 					 long accountNo = bankServices.openAccount(accountType, initBalance);
@@ -99,7 +101,7 @@ public class MainClass {
 					 System.out.println("Enter your pin number");
 					 pinNo = sc.nextInt();
 					 if(bankServices.getAccountDetails(accNo).getPinNumber()==pinNo)
-						 System.out.println(bankServices.getAccountDetails(accNo).toString());
+						 System.out.println(bankServices.accountString(accNo));
 					 else
 						 System.out.println("WRONG PIN");
 					 break;
@@ -121,6 +123,7 @@ public class MainClass {
 					 
 			case 8 : flag = false;
 					 break;
+					 
 			default: System.out.println("Invalid option");
 					 break;
 			}

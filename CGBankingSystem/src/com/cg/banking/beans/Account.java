@@ -10,21 +10,9 @@ public class Account {
 	private float accountBalance;
 	private Map<Integer, Transaction> transactions;
 	private long accountNo;
-	private int pinCounter;
 	
 	
-	@Override
-	public String toString() {
-		return "Account [pinNumber=" + pinNumber + ", accountType=" + accountType + ", accountStatus=" + accountStatus
-				+ ", accountBalance=" + accountBalance + ", transactions=" + transactions + ", accountNo=" + accountNo
-				+ ", pinCounter=" + pinCounter + "]";
-	}
-	public int getPinCounter() {
-		return pinCounter;
-	}
-	public void setPinCounter(int pinCounter) {
-		this.pinCounter = pinCounter;
-	}
+	
 	public float getAccountBalance() {
 		return accountBalance;
 	}
