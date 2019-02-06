@@ -42,6 +42,8 @@ public class Associate {
 		this.designation = designation2;
 		this.pancard = panCard2;
 		this.emailId = emailId2;
+		this.salary= salary;
+		this.bankDetails = bankDetails;
 	}
 	private int associateId;
 	public int getAssociateId() {

@@ -23,17 +23,17 @@ public class MainClass {
 		switch(switchKey) {
 		case 1 : System.out.println("******ADDING ASSOCIATE*****");
 				 System.out.println("Enter first name");
-				 String firstName = sc.nextLine();
+				 String firstName = sc.next();
 				 System.out.println("Enter last name");
-				 String lastName = sc.nextLine();
+				 String lastName = sc.next();
 				 System.out.println("Enter department name");
-				 String department = sc.nextLine();
+				 String department = sc.next();
 				 System.out.println("Enter designation");
-				 String designation = sc.nextLine();
+				 String designation = sc.next();
 				 System.out.println("Enter pan card");
-				 String pancard = sc.nextLine();
+				 String pancard = sc.next();
 				 System.out.println("Enter email");
-				 String emailId = sc.nextLine();
+				 String emailId = sc.next();
 				 System.out.println("Enter investment under80C");
 				 int investmentUnder = sc.nextInt();
 				 System.out.println("Enter basic salary");
@@ -45,7 +45,7 @@ public class MainClass {
 				 System.out.println("Enter account number");
 				 int accountNumber = sc.nextInt();
 				 System.out.println("Enter bank name");
-				 String bankName = sc.nextLine();
+				 String bankName = sc.next();
 				 System.out.println("Enter ifsc code");
 				 String ifscCode = sc.next();
 				 
