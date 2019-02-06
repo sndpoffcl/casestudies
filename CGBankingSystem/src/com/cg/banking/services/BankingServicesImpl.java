@@ -78,7 +78,7 @@ public class BankingServicesImpl implements BankingServices{
 			throws InsufficientAmountException, AccountNotFoundException, InvalidPinNumberException,
 			BankingServicesDownException, AccountBlockedException {
 			float newAmount = withdrawAmount(accountNoFrom, transferAmount, pinNumber);
-			float newAmountAfterDep = depositAmount(accountNoTo, newAmount);
+			float newAmountAfterDep = depositAmount(accountNoTo, transferAmount);
 			if(newAmount!=0.00f) 
 				return true;
 			else
