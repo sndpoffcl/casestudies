@@ -18,7 +18,8 @@ public class MainClass {
 		System.out.println("1. ADD AN ASSOCIATE");
 		System.out.println("2. GET NET SALARY OF EMPLOYEE");
 		System.out.println("3. GET ASSOCIATE DETAILS");
-		System.out.println("4. EXIT");
+		System.out.println("4. GET ALL ASSOCIATES");
+		System.out.println("5. EXIT");
 		switchKey = sc.nextInt();
 		switch(switchKey) {
 		case 1 : System.out.println("******ADDING ASSOCIATE*****");
@@ -65,8 +66,11 @@ public class MainClass {
 				 associateId  = sc.nextInt();
 				 System.out.println(services.getAssociateDetails(associateId).toString());
 				 break;
-		
-		case 4 : flag=0;
+
+		case 4 : System.out.println(services.getAllAssociatesDetails());
+				 break;
+				 
+		case 5 : flag=0;
 				 break;
 				 
 		default : System.out.println("Wrong option ");

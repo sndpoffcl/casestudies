@@ -45,6 +45,19 @@ public class Associate {
 		this.salary= salary;
 		this.bankDetails = bankDetails;
 	}
+	
+	public Associate(int associateId,int yearlyInvestmentUnder80C, String firstName2, String lastName2, String department2, String designation2, String panCard2, String emailId2, Salary salary, BankDetails bankDetails) {
+		this.associateId=associateId;
+		this.yearlyInvcestmentUnder80C = yearlyInvestmentUnder80C;
+		this.firstName = firstName2 ; 
+		this.lastName = lastName2;
+		this.department = department2;
+		this.designation = designation2;
+		this.pancard = panCard2;
+		this.emailId = emailId2;
+		this.salary= salary;
+		this.bankDetails = bankDetails;
+	}
 	private int associateId;
 	public int getAssociateId() {
 		return associateId;
