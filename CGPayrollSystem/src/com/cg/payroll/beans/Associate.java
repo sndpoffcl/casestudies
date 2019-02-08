@@ -46,6 +46,81 @@ public class Associate {
 		this.bankDetails = bankDetails;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + associateId;
+		result = prime * result + ((bankDetails == null) ? 0 : bankDetails.hashCode());
+		result = prime * result + ((department == null) ? 0 : department.hashCode());
+		result = prime * result + ((designation == null) ? 0 : designation.hashCode());
+		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((pancard == null) ? 0 : pancard.hashCode());
+		result = prime * result + ((salary == null) ? 0 : salary.hashCode());
+		result = prime * result + yearlyInvcestmentUnder80C;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Associate other = (Associate) obj;
+		if (associateId != other.associateId)
+			return false;
+		if (bankDetails == null) {
+			if (other.bankDetails != null)
+				return false;
+		} else if (!bankDetails.equals(other.bankDetails))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
+			return false;
+		if (designation == null) {
+			if (other.designation != null)
+				return false;
+		} else if (!designation.equals(other.designation))
+			return false;
+		if (emailId == null) {
+			if (other.emailId != null)
+				return false;
+		} else if (!emailId.equals(other.emailId))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (pancard == null) {
+			if (other.pancard != null)
+				return false;
+		} else if (!pancard.equals(other.pancard))
+			return false;
+		if (salary == null) {
+			if (other.salary != null)
+				return false;
+		} else if (!salary.equals(other.salary))
+			return false;
+		if (yearlyInvcestmentUnder80C != other.yearlyInvcestmentUnder80C)
+			return false;
+		return true;
+	}
+
+
 	public Associate(int associateId,int yearlyInvestmentUnder80C, String firstName2, String lastName2, String department2, String designation2, String panCard2, String emailId2, Salary salary, BankDetails bankDetails) {
 		this.associateId=associateId;
 		this.yearlyInvcestmentUnder80C = yearlyInvestmentUnder80C;

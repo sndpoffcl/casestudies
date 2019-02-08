@@ -11,7 +11,16 @@ import com.cg.payroll.exception.AssociateDetailNotfoundException;
 
 public class PayrollServicesImpl implements PayrollServices {
 
-	private AssociateDAO associateDAO  = new AssociateDAOImpl();
+	private AssociateDAO associateDAO  ;
+	
+	public  PayrollServicesImpl() {
+		associateDAO = new AssociateDAOImpl();
+	}
+	
+	public PayrollServicesImpl(AssociateDAO associateDAO) {
+		super();
+		this.associateDAO = associateDAO;
+	}
 
 	@Override
 	public int acceptAssociateDetails(String firstName, String lastName, String emailId, String department,
@@ -24,7 +33,7 @@ public class PayrollServicesImpl implements PayrollServices {
 
 
 	}
-
+ 
 	@Override
 	public int calculateNetSalary(int associateId) throws AssociateDetailNotfoundException {
 		Associate associate = associateDAO.findOne(associateId);

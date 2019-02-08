@@ -67,6 +67,55 @@ public class Salary  {
 	public void setNetSalary(int netSalary) {
 		this.netSalary = netSalary;
 	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + basicSalary;
+		result = prime * result + companyPf;
+		result = prime * result + conveyenceAllowance;
+		result = prime * result + epf;
+		result = prime * result + grossSalary;
+		result = prime * result + hra;
+		result = prime * result + monthlyTax;
+		result = prime * result + netSalary;
+		result = prime * result + otherAllowance;
+		result = prime * result + personalAllowance;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Salary other = (Salary) obj;
+		if (basicSalary != other.basicSalary)
+			return false;
+		if (companyPf != other.companyPf)
+			return false;
+		if (conveyenceAllowance != other.conveyenceAllowance)
+			return false;
+		if (epf != other.epf)
+			return false;
+		if (grossSalary != other.grossSalary)
+			return false;
+		if (hra != other.hra)
+			return false;
+		if (monthlyTax != other.monthlyTax)
+			return false;
+		if (netSalary != other.netSalary)
+			return false;
+		if (otherAllowance != other.otherAllowance)
+			return false;
+		if (personalAllowance != other.personalAllowance)
+			return false;
+		return true;
+	}
+
 	private int otherAllowance , personalAllowance , monthlyTax , epf;
 	private int companyPf, grossSalary, netSalary;
 }

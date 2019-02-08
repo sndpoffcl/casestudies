@@ -63,7 +63,7 @@ public class PayrollServicesTest {
 	
 	@Test
 	public void testCalculateNetSalaryForValidAssociateId() throws AssociateDetailNotfoundException{
-		int expectedNetSalary = 0;
+		int expectedNetSalary = 964260;
 		int actualNetSalary = services.calculateNetSalary(102);
 		Assert.assertEquals(expectedNetSalary, actualNetSalary);
 	}
