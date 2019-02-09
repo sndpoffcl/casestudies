@@ -6,8 +6,13 @@ public class Blog {
 	private String blogTitle;
 	private String blogBody;
 	private int blogId;
-	private int blogAuthor;
-	private Date creationDate;
+	private String blogAuthor;
+	
+	public Blog(String name, String blogTitle2, String blogBody2) {
+		this.blogAuthor = name;
+		this.blogTitle = blogTitle2;
+		this.blogBody = blogBody2;
+	}
 	
 	
 }
