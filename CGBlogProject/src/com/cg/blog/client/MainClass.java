@@ -1,5 +1,6 @@
 package com.cg.blog.client;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.cg.blog.beans.User;
@@ -27,7 +28,7 @@ public class MainClass {
 			if(optionKey==1) {
 				System.out.println("\t\t*********USER REGISTRATION*********");
 				System.out.println("Please enter your name");
-				String name = sc.nextLine();
+				String name = sc.next();
 				System.out.println("Please enter your username");
 				String username = sc.next();
 				System.out.println("Please enter your password");
@@ -61,12 +62,27 @@ public class MainClass {
 							 String blogTitle = sc.nextLine();
 							 System.out.println("PLEASE ENTER BLOG BODY");
 							 String blogBody = sc.nextLine();
-							 if(blogServices.createNewBlog(blogTitle, blogBody, username))
+							 if(blogServices.createNewBlog(blogTitle, blogBody, username)!=null)
 								 System.out.println("Your blog has been created successfully");
 							 break;
 					
 					case 2 : System.out.println("******SHOW ALL BLOGS*****");
+							 System.out.println(Arrays.asList(blogServices.getUserDetails(username).getBlogs()));
+							 break;
 					
+					case 3 : System.out.println("*********DELETE A BLOG******");
+					  		 System.out.println("PLEASE ENTER THE BLOG ID , YOU WANT TO DELETE");
+					  		 int blogIdToDel = sc.nextInt();
+					  		 blogServices.getUserDetails(username).getBlogs().remove(blogIdToDel);
+					  		 System.out.println("YOUR BLOG HAS BEEN DELETED");
+					  		 break;
+					
+					case 4 : System.out.println("\t\t YOU HAVE BEEN LOGGED OUT"); 
+							 signIn=0;
+							 break;
+				   
+				    default : System.out.println("PLEASE ENTER A VALID OPTION");
+				     		  break;
 					}
 					}
 				}
@@ -77,7 +93,6 @@ public class MainClass {
 			}else 
 				System.out.println("PLEASE CHOSE A VALID OPTION");
 			
-			
-		}
+			}
 	}
 }

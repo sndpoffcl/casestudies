@@ -44,7 +44,7 @@ public class BlogServicesImpl implements BlogServices{
 	
 
 	@Override
-	public boolean createNewBlog(String blogTitle, String blogBody , String username)
+	public Blog createNewBlog(String blogTitle, String blogBody , String username)
 			throws BlogTitleInvalidException, BlogSizeInvalidException, ServerDownException, UserNotFoundException {
 		if(blogTitle.length()<4 || blogTitle.length()>26)
 			throw new BlogTitleInvalidException("Title length should be more than 4 and less than 26");
@@ -52,8 +52,10 @@ public class BlogServicesImpl implements BlogServices{
 			throw new BlogSizeInvalidException("Blog body should be more than 32 words and less than 230 words");
 		
 		User user = getUserDetails(username);
-		Blog blog = 
-		return false;
+		int blogId = BlogDBUtil.getBLOG_ID_COUNTER();
+		Blog blog = new Blog(user.getName(), blogTitle, blogBody, blogId);
+		user.getBlogs().put(blogId, blog);
+		return blog;
 	}
 
 	@Override
